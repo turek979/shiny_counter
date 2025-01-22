@@ -1,68 +1,101 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(ShinyPokemonTrackerApp());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class ShinyPokemonTrackerApp extends StatelessWidget {
+  const ShinyPokemonTrackerApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Shiny Pokémon Tracker',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
+        primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: ShinyPokemonTracker(),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-  final String title;
+class ShinyPokemonTracker extends StatefulWidget {
+  const ShinyPokemonTracker({super.key});
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  _ShinyPokemonTrackerState createState() => _ShinyPokemonTrackerState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
+class _ShinyPokemonTrackerState extends State<ShinyPokemonTracker> {
+  List<Map<String, dynamic>> shinyPokemonList = [];
 
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
+  void _addShinyEncounter() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        String pokemonName = '';
+        return AlertDialog(
+          title: Text('Add Shiny Encounter'),
+          content: TextField(
+            onChanged: (value) {
+              pokemonName = value;
+            },
+            decoration: InputDecoration(hintText: 'Enter Pokémon Name'),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: Text('Cancel'),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                if (pokemonName.isNotEmpty) {
+                  setState(() {
+                    int index = shinyPokemonList.indexWhere((pokemon) =>
+                        pokemon['name'].toLowerCase() ==
+                        pokemonName.toLowerCase());
+                    if (index != -1) {
+                      shinyPokemonList[index]['count'] += 1;
+                    } else {
+                      shinyPokemonList.add({'name': pokemonName, 'count': 1});
+                    }
+                  });
+                }
+                Navigator.of(context).pop();
+              },
+              child: Text('Add'),
+            ),
+          ],
+        );
+      },
+    );
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(widget.title),
+        title: Text('Shiny Pokémon Tracker'),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
+      body: shinyPokemonList.isEmpty
+          ? Center(
+              child: Text('No shiny Pokémon encounters yet. Add one!'),
+            )
+          : ListView.builder(
+              itemCount: shinyPokemonList.length,
+              itemBuilder: (context, index) {
+                final pokemon = shinyPokemonList[index];
+                return ListTile(
+                  title: Text(pokemon['name']),
+                  trailing: Text('Count: ${pokemon['count']}'),
+                );
+              },
             ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
-          ],
-        ),
-      ),
       floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
+        onPressed: _addShinyEncounter,
+        child: Icon(Icons.add),
       ),
     );
   }

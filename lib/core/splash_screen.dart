@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-import 'package:shiny_counter/counter/presentation/counter_app.dart';
+import 'package:shiny_counter/counter/presentation/screens/counter_app.dart';
 import 'package:shiny_counter/core/configs/assets/app_vectors.dart';
 
 class SplashScreen extends StatefulWidget {

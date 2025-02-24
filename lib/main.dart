@@ -13,9 +13,6 @@ class ShinyPokemonTrackerApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Shiny Pokémon Tracker',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
       debugShowCheckedModeBanner: false,
       home: SplashScreen(),
     );

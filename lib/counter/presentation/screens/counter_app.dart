@@ -2,9 +2,22 @@ import 'package:flutter/material.dart';
 
 import 'package:shiny_counter/core/configs/theme/app_colors.dart';
 import 'package:shiny_counter/counter/presentation/widgets/pokemon_list_tile.dart';
+import 'package:shiny_counter/counter/data/models/pokemon_counter_model.dart';
 
-class ShinyPokemonCounter extends StatelessWidget {
+class ShinyPokemonCounter extends StatefulWidget {
   const ShinyPokemonCounter({super.key});
+
+  @override
+  State<ShinyPokemonCounter> createState() => _ShinyPokemonCounterState();
+}
+
+class _ShinyPokemonCounterState extends State<ShinyPokemonCounter> {
+  final List<PokemonCounterModel> pokemonHuntList = [
+    PokemonCounterModel(pokemonSpecies: 'ditto', odds: '1/4096'),
+    PokemonCounterModel(pokemonSpecies: 'eevee', odds: '1/8192'),
+  ];
+
+  final int index = 2;
 
   @override
   Widget build(BuildContext context) {
@@ -28,49 +41,25 @@ class ShinyPokemonCounter extends StatelessWidget {
                 'New Hunt',
                 style: TextStyle(fontSize: 15, fontWeight: FontWeight.w700),
               ),
-              icon: Icon(
-                Icons.add,
-                size: 20,
-              ),
+              icon: Icon(Icons.add, size: 22),
             ),
           ),
-          // Padding(
-          //     padding: const EdgeInsets.only(right: 8),
-          //     child: TextButton(
-          //       style: TextButton.styleFrom(
-          //           backgroundColor: Colors.black,
-          //           iconColor: Colors.white,
-          //           foregroundColor: Colors.white),
-          //       onPressed: () {},
-          //       child: Row(
-          //         children: [
-          //           Text(
-          //             String.fromCharCode(Icons.add.codePoint),
-          //             style: TextStyle(
-          //                 color: Colors.white,
-          //                 fontSize: 16,
-          //                 fontWeight: FontWeight.w600),
-          //           ),
-          //           SizedBox(width: 5),
-          //           Text(
-          //             'New Hunt',
-          //             style: TextStyle(
-          //                 color: Colors.white,
-          //                 fontSize: 16,
-          //                 fontWeight: FontWeight.w600),
-          //           ),
-          //         ],
-          //       ),
-          //     )),
         ],
       ),
-      body: SingleChildScrollView(
+      body: ListView.builder(
         padding: EdgeInsets.all(20),
-        child: Column(
-          children: [
-            for (int i = 0; i < 10; i++) PokemonListTile(),
-          ],
-        ),
+        itemCount: pokemonHuntList.length,
+        itemBuilder: (BuildContext context, index) {
+          return PokemonListTile(
+            pokemonSpecies: pokemonHuntList[index].pokemonSpecies,
+            odds: pokemonHuntList[index].odds,
+          );
+        },
+        // child: Column(
+        //   children: [
+        //     for (int i = 0; i < 1; i++) PokemonListTile(),
+        //   ],
+        // ),
       ),
     );
   }

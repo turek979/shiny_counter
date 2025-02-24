@@ -3,8 +3,19 @@ import 'package:flutter/material.dart';
 import 'package:shiny_counter/counter/presentation/widgets/pokmeon_list_tile_button.dart';
 import '../../../core/configs/theme/app_colors.dart';
 
-class PokemonListTile extends StatelessWidget {
-  const PokemonListTile({super.key});
+class PokemonListTile extends StatefulWidget {
+  const PokemonListTile(
+      {super.key, required this.pokemonSpecies, required this.odds});
+
+  final String pokemonSpecies;
+  final String odds;
+
+  @override
+  State<PokemonListTile> createState() => _PokemonListTileState();
+}
+
+class _PokemonListTileState extends State<PokemonListTile> {
+  int currentEncounters = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +46,7 @@ class PokemonListTile extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Ditto',
+                    widget.pokemonSpecies,
                     style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
                   ),
                   Text(
@@ -55,12 +66,10 @@ class PokemonListTile extends StatelessWidget {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  Text('Current encounters',
+                      style: TextStyle(color: Colors.black87, fontSize: 16)),
                   Text(
-                    'Current encounters',
-                    style: TextStyle(color: Colors.black87, fontSize: 16),
-                  ),
-                  Text(
-                    '123',
+                    '$currentEncounters',
                     style: TextStyle(
                         color: Colors.black,
                         fontSize: 22,
@@ -75,7 +84,7 @@ class PokemonListTile extends StatelessWidget {
                     style: TextStyle(color: Colors.black87, fontSize: 16),
                   ),
                   Text(
-                    '1/4096',
+                    widget.odds,
                     style: TextStyle(
                         color: Colors.black,
                         fontSize: 22,
@@ -92,7 +101,11 @@ class PokemonListTile extends StatelessWidget {
               PokmeonListTileButton(
                   icon: Icon(Icons.add, size: 22),
                   label: 'Count',
-                  onPressed: () {},
+                  onPressed: () {
+                    setState(() {
+                      currentEncounters++;
+                    });
+                  },
                   backgroundColor: AppColors.grey,
                   iconColor: Colors.black,
                   foregroundColor: Colors.black),

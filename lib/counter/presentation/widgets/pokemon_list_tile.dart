@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+import 'package:shiny_counter/counter/presentation/widgets/pokmeon_list_tile_button.dart';
+import '../../../core/configs/theme/app_colors.dart';
+
 class PokemonListTile extends StatelessWidget {
   const PokemonListTile({super.key});
 
@@ -18,7 +21,7 @@ class PokemonListTile extends StatelessWidget {
                 height: 75,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20),
-                  color: Colors.grey[300],
+                  color: AppColors.grey,
                 ),
                 child: Image.network(
                   'https://archives.bulbagarden.net/media/upload/2/2b/Spr_3r_132.png',
@@ -86,34 +89,21 @@ class PokemonListTile extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              Expanded(
-                child: TextButton.icon(
-                    style: TextButton.styleFrom(
-                      backgroundColor: Colors.grey[300],
-                      iconColor: Colors.black,
-                      foregroundColor: Colors.black,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                    ),
-                    onPressed: () {},
-                    icon: Icon(Icons.add),
-                    label: Text('Count')),
-              ),
+              PokmeonListTileButton(
+                  icon: Icon(Icons.add, size: 22),
+                  label: 'Count',
+                  onPressed: () {},
+                  backgroundColor: AppColors.grey,
+                  iconColor: Colors.black,
+                  foregroundColor: Colors.black),
               SizedBox(width: 10),
-              Expanded(
-                child: TextButton.icon(
-                    style: TextButton.styleFrom(
-                      backgroundColor: Colors.black,
-                      iconColor: Colors.white,
-                      foregroundColor: Colors.white,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                    ),
-                    onPressed: () {},
-                    icon: Icon(Icons.star),
-                    label: Text('Found!')),
+              PokmeonListTileButton(
+                icon: Icon(Icons.star_rounded, size: 22),
+                label: 'Found!',
+                onPressed: () {},
+                backgroundColor: Colors.black,
+                iconColor: Colors.white,
+                foregroundColor: Colors.white,
               ),
             ],
           )

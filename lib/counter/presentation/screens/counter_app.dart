@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'package:shiny_counter/core/configs/theme/app_colors.dart';
 import 'package:shiny_counter/counter/presentation/widgets/pokemon_list_tile.dart';
 
 class ShinyPokemonCounter extends StatelessWidget {
@@ -8,7 +9,7 @@ class ShinyPokemonCounter extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[300],
+      backgroundColor: AppColors.grey,
       appBar: AppBar(
         title: Text(
           'Shiny Hunter',

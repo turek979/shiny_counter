@@ -31,7 +31,7 @@ class PokmeonListTileButton extends StatelessWidget {
           ),
         ),
         onPressed: () {
-          onPressed();
+          onPressed;
         },
         icon: icon,
         label: Text(label),

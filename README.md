@@ -1,16 +1,31 @@
-# shiny_counter
+# Shiny Counter
 
-A new Flutter project.
+Shiny Counter is a Flutter application designed to help Pokémon trainers keep track of their shiny hunting progress. The app allows users to add Pokémon species they are hunting and track their odds of encountering a shiny Pokémon.
+
+## Features
+
+- Add new Pokémon species to your shiny hunting list.
+- Track the odds of encountering a shiny Pokémon for each species.
+- View a list of all Pokémon species you are currently hunting.
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+### Prerequisites
 
-A few resources to get you started if this is your first Flutter project:
+- [Flutter](https://flutter.dev/docs/get-started/install) (version 3.6.0 or higher)
+- [Dart](https://dart.dev/get-dart) (version 3.6.0 or higher)
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+### Installation
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+1. Clone the repository:
+
+git clone https://github.com/your-username/shiny_counter.git
+cd shiny_counter
+
+2. Clone the repository:
+
+flutter pub get
+
+3. Run the app
+
+flutter run

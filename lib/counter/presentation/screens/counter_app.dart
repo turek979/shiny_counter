@@ -19,6 +19,14 @@ class _ShinyPokemonCounterState extends State<ShinyPokemonCounter> {
 
   final int index = 2;
 
+  void _openAddNewHunt() {
+    showModalBottomSheet(
+        useSafeArea: true,
+        isScrollControlled: true,
+        context: context,
+        builder: (context) => Container());
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,7 +44,7 @@ class _ShinyPokemonCounterState extends State<ShinyPokemonCounter> {
                   backgroundColor: Colors.black,
                   iconColor: Colors.white,
                   foregroundColor: Colors.white),
-              onPressed: () {},
+              onPressed: _openAddNewHunt,
               label: Text(
                 'New Hunt',
                 style: TextStyle(fontSize: 15, fontWeight: FontWeight.w700),
@@ -55,11 +63,6 @@ class _ShinyPokemonCounterState extends State<ShinyPokemonCounter> {
             odds: pokemonHuntList[index].odds,
           );
         },
-        // child: Column(
-        //   children: [
-        //     for (int i = 0; i < 1; i++) PokemonListTile(),
-        //   ],
-        // ),
       ),
     );
   }
